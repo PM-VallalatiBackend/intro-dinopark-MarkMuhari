@@ -39,6 +39,13 @@ public class DinoService {
                         .collect(Collectors.toList());
     }
 
+    public List<DinoInfo> listByType(DinoType type) {
+        return dinoRepository.listByType(type)
+                .stream()
+                .map(dinosaur -> convertToInfo(dinosaur))
+                .collect(Collectors.toList());
+    }
+
     private Dinosaur convertToDinosaur(DinoCreateCommand command) {
         return new Dinosaur()
                 .setName(command.getName())

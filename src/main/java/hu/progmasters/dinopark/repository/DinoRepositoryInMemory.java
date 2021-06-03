@@ -14,7 +14,8 @@ import java.util.stream.Collectors;
 public class DinoRepositoryInMemory implements DinoRepository {
 
     private Map<Integer, Dinosaur> dinosaurs = new HashMap<>();
-    private int lastIndexUsed;
+    private int lastIndexUsed = 0;
+
 
     @Override
     public Dinosaur save(Dinosaur dinosaur) {
@@ -28,15 +29,15 @@ public class DinoRepositoryInMemory implements DinoRepository {
     public List<Dinosaur> list() {
         return dinosaurs.values()
                 .stream()
-                    .sorted(Comparator.comparing(Dinosaur::getId))
-                        .collect(Collectors.toList());
+                .sorted(Comparator.comparing(Dinosaur::getId))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Dinosaur> listByType(DinoType dinoType) {
         return dinosaurs.values().stream()
                 .filter(dinosaur -> dinosaur.getDinoType().equals(dinoType))
-                    .sorted(Comparator.comparing(Dinosaur::getId))
-                      .collect(Collectors.toList());
+                .sorted(Comparator.comparing(Dinosaur::getId))
+                .collect(Collectors.toList());
     }
 }
